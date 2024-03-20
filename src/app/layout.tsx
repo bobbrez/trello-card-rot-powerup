@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://p.trellocdn.com/power-up.min.css"
+        />
+      </head>
+      <body className={inter.className}>
+        {children}
+        <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" />
+        <Script
+          src={`https://p.trellocdn.com/power-up.min.js?key=${process.env.TRELLO_POWERUP_KEY}`}
+        />
+      </body>
     </html>
   );
 }
